@@ -1,6 +1,10 @@
 const supabase = require("../config/supabaseConfig");
 
 module.exports = {
+  getApi: (res, res) => {
+    res.send("Welcome to the Ballpark Bytes API");
+  },
+
   getSectionTables: async (req, res) => {
     const { section } = req.params;
 
