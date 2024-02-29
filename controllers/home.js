@@ -1,7 +1,7 @@
 const supabase = require("../config/supabaseConfig");
 
 module.exports = {
-  getApi: (res, res) => {
+  getApi: (req, res) => {
     res.send("Welcome to the Ballpark Bytes API");
   },
 
