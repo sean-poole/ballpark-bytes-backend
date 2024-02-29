@@ -31,6 +31,11 @@ app.use("/", homeRoutes);
 app.use("/tables", tablesRoutes);
 app.use("/payment", paymentRoutes);
 
+app.use(express.static(path.join(__dirname, "..", "frontend", "build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "frontend", "build", "index.html"));
+});
+
 app.listen(process.env.PORT, () => {
   console.log(`Server running on PORT: ${process.env.PORT}.`);
 });
