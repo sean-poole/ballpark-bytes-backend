@@ -33,14 +33,6 @@ app.use("/", homeRoutes);
 app.use("/tables", tablesRoutes);
 app.use("/payment", paymentRoutes);
 
-app.get("*", function(_, res) {
-  res.sendFile("index.html", { root: "https://ballparkbytes.netlify.app" }, function(err) {
-    if (err) {
-      res.status(500).send(err);
-    }
-  });
-});
-
 app.listen(process.env.PORT, () => {
   console.log(`Server running on PORT: ${process.env.PORT}.`);
 });
