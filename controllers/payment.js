@@ -1,6 +1,7 @@
 const path = require("path");
 const supabase = require("../config/supabaseConfig");
-require("dotenv").config({ path: path.resolve(__dirname, ".env")});
+// require("dotenv").config({ path: path.resolve(__dirname, ".env")});
+require("dotenv").config();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 module.exports = {
