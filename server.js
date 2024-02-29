@@ -27,15 +27,9 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, "build")));
-
 app.use("/", homeRoutes);
 app.use("/tables", tablesRoutes);
 app.use("/payment", paymentRoutes);
-
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "build", "index.html"));
-});
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on PORT: ${process.env.PORT}.`);
