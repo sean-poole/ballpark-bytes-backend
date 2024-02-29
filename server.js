@@ -31,6 +31,10 @@ app.use("/", homeRoutes);
 app.use("/tables", tablesRoutes);
 app.use("/payment", paymentRoutes);
 
+app.get("/", (req, res) => {
+  res.send("Welcome to the Ballpark Bytes API.");
+});
+
 app.listen(process.env.PORT, () => {
   console.log(`Server running on PORT: ${process.env.PORT}.`);
 });
