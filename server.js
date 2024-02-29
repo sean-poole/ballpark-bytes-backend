@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const path = require("path");
+// const path = require("path");
 const supabase = require("./config/supabaseConfig");
 
 const homeRoutes = require("./routes/home");

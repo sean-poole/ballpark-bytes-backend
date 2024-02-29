@@ -1,4 +1,4 @@
-const path = require("path");
+// const path = require("path");
 const supabase = require("../config/supabaseConfig");
 // require("dotenv").config({ path: path.resolve(__dirname, ".env")});
 require("dotenv").config();
