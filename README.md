@@ -1,7 +1,7 @@
 # ⚾ Ballpark Bytes ⚾ | <a href="https://ballparkbytes.netlify.app/" target="_blank">Visit Here</a>
 
 <div align="center">
-  <img src="https://github.com/sean-poole/ballpark-bytes/blob/main/preview/ballparkbytes-preview.gif" alt="Ballpark-Bytes">
+  <img src="https://github.com/sean-poole/ballpark-bytes-backend/blob/main/preview/ballparkbytes-preview.gif" alt="Ballpark-Bytes">
 </div>
 
   ## 🌭 How It's Made: 
