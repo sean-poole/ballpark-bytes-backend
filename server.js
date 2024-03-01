@@ -18,7 +18,7 @@ supabase.from("menu").select("id").range(0, 0)
   });
 
 const corsOptions = {
-  origin: "https://ballparkbytes.netlify.app",
+  origin: ["https://ballparkbytes.netlify.app", "http://localhost:3000"],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true
 }
@@ -30,6 +30,14 @@ app.use(express.json());
 app.use("/", homeRoutes);
 app.use("/tables", tablesRoutes);
 app.use("/payment", paymentRoutes);
+
+// For local host
+// app.use(express.static(path.join(__dirname, "frontend/build")));
+// app.get("*", function(_, res) {
+//   res.sendFile(path.join(__dirname, "client/build", "index.html"), function(err) {
+//     res.status(500).send(err);
+//   });
+// });
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Ballpark Bytes API.");
