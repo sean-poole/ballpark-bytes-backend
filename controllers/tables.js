@@ -1,6 +1,35 @@
 const supabase = require("../config/supabaseConfig");
 
 module.exports = {
+  getMenu: async (req, res) => {
+    const { location } = req.params;
+
+    if (!location) {
+      console.error("Invalid input data. 'location' parameter is required.");
+      return res.status(400).json({ error: "Invalid input data." });
+    }
+
+    try {
+      // Get the menu for a specified location.
+      const { data, error } = await supabase
+        .from("menu")
+        .select("*")
+        .contains("location", [location])
+        .order("id", { ascending: true });
+
+      if (error) {
+        console.error(`Error fetching ${location} menu.`, error);
+        return res.status(500).json({ error: "Error fetching menu." });
+      }
+
+      // Send returned menu object to frontend.
+      return res.status(200).json({ menu: data });
+    } catch(err) {
+      console.error(`Error fetching ${location} menu.`, err);
+      return res.status(500).json({ error: "Internal server error." });
+    }
+  }, 
+
   addItem: async (req, res) => {
     const { tableInfo, itemId } = req.body;
 

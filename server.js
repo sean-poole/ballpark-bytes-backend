@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-// const path = require("path");
+const path = require("path");
 const supabase = require("./config/supabaseConfig");
 
 const homeRoutes = require("./routes/home");
@@ -32,12 +32,12 @@ app.use("/tables", tablesRoutes);
 app.use("/payment", paymentRoutes);
 
 // For local host
-// app.use(express.static(path.join(__dirname, "frontend/build")));
-// app.get("*", function(_, res) {
-//   res.sendFile(path.join(__dirname, "client/build", "index.html"), function(err) {
-//     res.status(500).send(err);
-//   });
-// });
+app.use(express.static(path.join(__dirname, "frontend/build")));
+app.get("*", function(_, res) {
+  res.sendFile(path.join(__dirname, "client/build", "index.html"), function(err) {
+    res.status(500).send(err);
+  });
+});
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Ballpark Bytes API.");

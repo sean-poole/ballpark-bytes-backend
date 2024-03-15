@@ -3,8 +3,8 @@ const router = express.Router();
 const homeController = require("../controllers/home");
 
 // Main Routes
-router.get("/tables/:section", homeController.getSectionTables);
-router.get("/getTable/:id", homeController.getTableInformation);
-router.get("/getMenu/:location", homeController.getMenu);
+router.post("/login", homeController.login);
+router.post("/logout", homeController.logout);
+router.get("/getSectionTables/:section", homeController.getSectionTables);
 
 module.exports = router;
