@@ -34,7 +34,7 @@ module.exports = {
         }
       });
 
-      console.log("Payment successful.");
+      console.log("Payment intent created.");
   
       res.status(200).json({ clientSecret: paymentIntent.client_secret });
     } catch(err) {
@@ -69,6 +69,8 @@ module.exports = {
         console.error("Error creating receipt.", error);
         return res.status(500).json({ error: "Error creating recipt." });
       }
+
+      console.log("Payment successful.");
 
       return res.status(200).json({ success: true, msg: "Successfully created receipt." });
     } catch(err) {
