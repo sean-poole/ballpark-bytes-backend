@@ -195,7 +195,7 @@ module.exports = {
       }
 
       // Send the updated table to frontend for context storage.
-      return res.status(200).json({ success: true, msg: `Applied ${discount}% discount to table ${tableInfo.tableNumber}`, table: updatedTable });
+      return res.status(200).json({ success: true, msg: `Applied ${discount}% discount to table ${tableInfo.tableNumber}.`, table: updatedTable });
     } catch(err) {
       console.log("Error applying discount.", err);
       return res.status(500).json({ success: false, error: "Error applying discount." });
