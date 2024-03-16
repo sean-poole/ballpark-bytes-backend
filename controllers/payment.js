@@ -75,8 +75,8 @@ module.exports = {
 
       return res.status(200).json({ success: true, msg: "Payment successful. Receipt created." });
     } catch(err) {
-      console.error("Error creating receipt.", err);
-      return res.status(500).json({ success: false, error: "Error creating receipt." });
+      console.error("Payment error.", err);
+      return res.status(500).json({ success: false, error: "Payment error." });
     }
   },
 
