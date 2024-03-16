@@ -6,7 +6,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 module.exports = {
   getConfig: (req, res) => {
-    res.status(200).json({ publishableKey: process.env.STRIPE_PUBLISHABLE_KEY });
+    res.status(200).json({ success: true, publishableKey: process.env.STRIPE_PUBLISHABLE_KEY });
   },
 
   createPayment: async (req, res) => {
@@ -16,7 +16,7 @@ module.exports = {
 
     if (!tableInfo || !total || isNaN(Number(total))) {
       console.error("Invalid input data. 'tableInfo' and 'total' parameters are required.");
-      return res.status(400).json({ error: "Invalid input data." });
+      return res.status(400).json({ success: false, error: "Invalid input data." });
     }
 
     // Round total to 2 decimal places.
@@ -36,10 +36,10 @@ module.exports = {
 
       console.log("Payment intent created.");
   
-      res.status(200).json({ clientSecret: paymentIntent.client_secret });
+      res.status(200).json({ success: true, clientSecret: paymentIntent.client_secret });
     } catch(err) {
       console.error("Error creating payment intent.", err);
-      return res.status(500).json({ error: "Error creating payment intent. Please try again later." });
+      return res.status(500).json({ success: false, error: "Error creating payment intent. Please try again later." });
     }
   },
 
@@ -48,7 +48,7 @@ module.exports = {
 
     if (!tableInfo || !total || isNaN(Number(total))) {
       console.error("Invalid input data. 'tableInfo' and 'total' parameters are required.");
-      return res.status(400).json({ error: "Invalid input data." });
+      return res.status(400).json({ success: false, error: "Invalid input data." });
     }
 
     try {
@@ -67,15 +67,16 @@ module.exports = {
 
       if (error) {
         console.error("Error creating receipt.", error);
-        return res.status(500).json({ error: "Error creating recipt." });
+        return res.status(500).json({ success: false, error: "Error creating recipt." });
       }
 
       console.log("Payment successful.");
+      console.log("Receipt created.");
 
-      return res.status(200).json({ success: true, msg: "Successfully created receipt." });
+      return res.status(200).json({ success: true, msg: "Payment successful. Receipt created." });
     } catch(err) {
       console.error("Error creating receipt.", err);
-      return res.status(500).json({ error: "Error creating receipt." });
+      return res.status(500).json({ success: false, error: "Error creating receipt." });
     }
   },
 
@@ -84,7 +85,7 @@ module.exports = {
 
     if (!tableInfo) {
       console.error("Invalid input data. 'tableInfo' parameter is required.");
-      return res.status(400).json({ error: "Invalid input data." });
+      return res.status(400).json({ success: false, error: "Invalid input data." });
     }
 
     try {
@@ -97,7 +98,7 @@ module.exports = {
 
       if (error) {
         console.error("Error fetching table.", err);
-        return res.status(500).json({ error: "Error fetching table information." });
+        return res.status(500).json({ success: false, error: "Error fetching table information." });
       }
 
       // Clear fields of current table.
@@ -109,15 +110,15 @@ module.exports = {
 
       if (deletedError) {
         console.error("Error clearing table.", err);
-        return res.status(500).json({ error: "Error clearing table." });
+        return res.status(500).json({ success: false, error: "Error clearing table." });
       }
 
       console.log("Successfully cleared table.");
 
-      return res.status(200).json({ msg: "Successfully cleared table." });
+      return res.status(200).json({ success: true, msg: "Table cleared." });
     } catch(err) {
       console.error("Error deleting table info.", err);
-      return res.status(500).json({ error: "Error deleting table info." });
+      return res.status(500).json({ success: false, error: "Error deleting table info." });
     }
   }
 }

@@ -14,13 +14,15 @@ module.exports = {
 
       if (error) {
         console.log("Error logging in: ", error);
-        return res.status(500).json({ error: "Invalid login credentials." });
+        return res.status(500).json({ success: false, error: "Invalid login credentials." });
       }
 
-      return res.status(200).json({ token: data.session.access_token, email: data.user.email });
+      const user = { token: data.session.access_token, email: data.user.email };
+
+      return res.status(200).json({ success: true, msg: "Logging in...", user: user });
     } catch(err) {
       console.error("Error logging in: ", err);
-      return res.status(500).json({ error: err });
+      return res.status(500).json({ success: false, error: err });
     }
   },
 
@@ -30,12 +32,13 @@ module.exports = {
       const { error } = await supabase.auth.signOut();
 
       if (error) {
-        return res.status(500).json({ error: error.message });
+        return res.status(500).json({ success: false, error: error.message });
       }
 
-      return res.status(200).json({ success: "Successfully logged out." });
+      return res.status(200).json({ success: true, msg: "Logging out..." });
     } catch(err) {
       console.error("Error logging out: ", err);
+      return res.status(500).json({ success: false, error: err });
     }
   },
 
@@ -57,14 +60,14 @@ module.exports = {
 
     if (error) {
       console.error(`Error fetching tables from ${section} section.`, error);
-      return res.status(500).json({ error: "Error fetching section tables." });
+      return res.status(500).json({ success: false, error: "Error fetching section tables." });
     }
 
     // Send returned table objects to frontend.
-    return res.status(200).json({ tables: data });
+    return res.status(200).json({ success: true, tables: data });
     } catch(err) {
       console.error(`Error fetching tables from ${section} section.`, err.message);
-      return res.status(500).json({ error: "Internal server error." });
+      return res.status(500).json({ success: false, error: "Internal server error." });
     }
   }
 }
